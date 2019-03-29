@@ -306,7 +306,19 @@ class BST
 	//create function to find height of tree
 	int ht(Node *cur)
 	{
-
+		//base case
+		if(!cur)
+			return 0;
+		
+		//initialize variable for left and right
+		int lh=ht(cur->lft);
+		int rh=ht(cur->rgt);
+		
+		//compare the levels from left and right sub tree using larger one
+		if(lh>rh)
+			return (lh+1);
+		else
+			return (rh+1);
 	}		
 };
 
@@ -315,6 +327,7 @@ int main()
 {
 	//create object of the class
 	BST b;
+	int x,y;
 
 	//call for the working of the functions in the class
 	b.inserthpr(4);	
@@ -323,6 +336,7 @@ int main()
 	b.inserthpr(3);
 	b.inserthpr(9);
 	b.inserthpr(6);
+	b.inserthpr(7);
 	b.displayhpr();
 	cout<<endl;
 	Node *f=b.searchhpr(5);
@@ -335,6 +349,16 @@ int main()
 	b.displayhpr();
 	b.del(9);
 	b.displayhpr();
+	Node *c=b.count();
+	cout<<"No. of nodes = "<<c<<endl;
+	b.displayhpr();
+	cout<<"Range search"<<endl;
+	cout<<"Enter the values for upper and lower limit of the range : "<<endl;
+	cin>>x>>y;
+	cout<<"Items in between the given range :"<<endl;
+	b.rngp(x,y);
+	cout<<endl<<"No. of items in between the given range is "<<b.rngc(x,y)<<endl;
+	cout<<"Height of the tree is "<<b.ht()<<endl;
 	//terminating main function
 
 	return 0;
